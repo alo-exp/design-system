@@ -1,0 +1,154 @@
+.hp-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 140px var(--container-pad) 100px;
+  text-align: center;
+  background-color: var(--color-bg);
+  transition: var(--transition-default);
+}
+
+/* Light mode hero background */
+[data-theme="light"] .hp-hero {
+  background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 50%, #fdf2f8 100%);
+}
+
+/* Decorative blobs (dark mode only) */
+.hp-hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+}
+.hp-hero__blob--1 {
+  width: 300px; height: 300px;
+  background: var(--color-accent-light);
+  top: -80px; right: -60px;
+  opacity: 0.08;
+}
+.hp-hero__blob--2 {
+  width: 200px; height: 200px;
+  background: var(--color-accent-tertiary);
+  bottom: -40px; left: -30px;
+  opacity: 0.07;
+}
+[data-theme="light"] .hp-hero__blob { display: none; }
+
+.hp-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hp-hero__badge { margin-bottom: var(--space-3); }
+
+.hp-hero__h1 {
+  font-size: var(--font-size-hero);
+  font-weight: var(--font-weight-hero);
+  letter-spacing: var(--letter-spacing-hero);
+  line-height: var(--line-height-heading);
+  /* padding-bottom prevents -webkit-background-clip:text from clipping descenders
+     (e.g. the 'g' in "Knowledge") when line-height is tight */
+  padding-bottom: 0.15em;
+  margin: 0 0 var(--space-2);
+}
+
+.hp-hero__sub {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+  max-width: 480px;
+  margin: 0 0 var(--space-4);
+}
+
+.hp-hero__ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.hp-hero__pills {
+  display: flex;
+  gap: var(--space-1);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hp-hero__pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(var(--color-accent-light-rgb), 0.08);
+  border: 1px solid rgba(var(--color-accent-light-rgb), 0.2);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.hp-hero__pill-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(var(--color-accent-light-rgb), 0.2);
+  color: var(--color-accent-indigo-300);
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Badge shared styles */
+.hp-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-label);
+  letter-spacing: 0.04em;
+}
+.hp-badge--indigo {
+  background: rgba(var(--color-accent-primary-rgb), 0.15);
+  color: var(--color-accent-indigo-300);
+}
+[data-theme="light"] .hp-badge--indigo {
+  background: rgba(var(--color-accent-primary-rgb), 0.1);
+  color: #3730a3;
+}
+.hp-badge--violet { background: rgba(124,58,237,0.15); color: #c084fc; }
+.hp-badge--pink   { background: rgba(219,39,119,0.15); color: #f9a8d4; }
+.hp-badge--green  { background: rgba(5,150,105,0.15);  color: #34d399; }
+.hp-badge--amber  { background: rgba(217,119,6,0.15);  color: #fbbf24; }
+
+/* Trust row — checkmark + label items beneath step pills */
+.hp-hero__trust {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+
+.hp-hero__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.hp-hero__trust-item svg {
+  color: #34d399; /* green-400 — positive signal */
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .hp-hero { padding: 100px var(--container-pad) 64px; }
+  .hp-hero__h1 { font-size: clamp(2rem, 8vw, 3rem); }
+}

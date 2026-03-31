@@ -1,0 +1,94 @@
+/* ============================================================
+   Homepage-scoped styles.
+   Imported only by HomePage.tsx and its children.
+   ============================================================ */
+@import url('../../../design-system/tokens.css');
+
+/* Reset for homepage context */
+.hp-root *,
+.hp-root *::before,
+.hp-root *::after {
+  box-sizing: border-box;
+}
+
+.hp-root {
+  font-family: var(--font-family-homepage);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  transition: var(--transition-default);
+}
+
+/* Container utility */
+.hp-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* Gradient text utility */
+.hp-gradient-text {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Scroll fade-in utility (add via IntersectionObserver in TS) */
+.hp-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition-fade);
+}
+.hp-fade-in.hp-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section base */
+.hp-section {
+  padding: var(--space-section-y) 0;
+}
+
+/* Section heading */
+.hp-section-heading {
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-section);
+  letter-spacing: var(--letter-spacing-section);
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin: 0 0 var(--space-3);
+}
+
+/* Section subheading */
+.hp-section-sub {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  text-align: center;
+  line-height: var(--line-height-body);
+  max-width: 560px;
+  margin: 0 auto var(--space-8);
+}
+
+/* ── Accessibility: focus indicators ──────────────────────────── */
+.hp-btn:focus-visible,
+.hp-nav__theme-btn:focus-visible,
+.hp-nav__hamburger:focus-visible,
+.hp-nav__link:focus-visible,
+.hp-footer__link:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hp-root *,
+  .hp-root *::before,
+  .hp-root *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
