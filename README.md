@@ -85,4 +85,4 @@ Theme is applied via `data-theme="dark|light"` on `<html>`, persisted to `localS
 
 ## License
 
-Proprietary — Ālo Explorers.
+MIT
