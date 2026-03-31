@@ -1,4 +1,4 @@
-# Wyzr Design System — Spec
+# Ālo Design System — Spec
 
 **Date:** 2026-03-25
 **Status:** Approved
@@ -8,8 +8,8 @@
 
 ## 1. Overview
 
-The Wyzr Design System establishes visual consistency across the marketing homepage and the app.
-It is inspired by the MultAI site (https://multai.alolabs.dev) for the homepage layer, while retaining Wyzr's existing font and MUI-based design for the app UI.
+The Ālo Design System establishes visual consistency across the marketing homepage and the app.
+It is inspired by the MultAI site (https://multai.alolabs.dev) for the homepage layer, while retaining Ālo's existing font and MUI-based design for the app UI.
 
 ### Key principles
 

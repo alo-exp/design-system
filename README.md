@@ -1,6 +1,6 @@
-# Wyzr Design System
+# Ālo Design System
 
-A token-based design system powering the [Wyzr](https://gen-lang-client-0146593416.web.app) application — professional SaaS UI with dark/light mode, responsive breakpoints, and dual rendering contexts (CSS custom properties for the homepage, MUI theme for the app).
+A token-based design system with dark/light mode, responsive breakpoints, and dual rendering contexts — CSS custom properties for the homepage, MUI theme for the app.
 
 ## Structure
 
@@ -20,11 +20,11 @@ design-system/
 │   ├── HomeFooter.css    Footer (links, copyright)
 │   └── HomeLegal.css     Legal pages (Terms, Privacy)
 ├── hooks/
-│   └── useWyzrTheme.ts   React hook for dark/light mode (localStorage-backed)
+│   └── useAloTheme.ts    React hook for dark/light mode (localStorage-backed)
 ├── docs/
 │   └── DESIGN_SYSTEM.md  Quick-reference developer guide
 └── specs/
-    └── 2026-03-25-wyzr-design-system-design.md  Full specification
+    └── 2026-03-25-alo-design-system-design.md  Full specification
 ```
 
 ## Brand
@@ -68,12 +68,12 @@ const theme = buildMuiTheme('dark');
 ### Dark/Light Mode
 
 ```tsx
-import { useWyzrTheme } from './design-system/hooks/useWyzrTheme';
+import { useAloTheme } from './design-system/hooks/useAloTheme';
 
-const { isDark, toggleTheme } = useWyzrTheme();
+const { theme, toggleTheme } = useAloTheme();
 ```
 
-Theme is applied via `data-theme="dark|light"` on `<html>`, persisted to `localStorage('wyzr-theme')`.
+Theme is applied via `data-theme="dark|light"` on `<html>`, persisted to `localStorage('alo-theme')`.
 
 ## Responsive Breakpoints
 
@@ -85,4 +85,4 @@ Theme is applied via `data-theme="dark|light"` on `<html>`, persisted to `localS
 
 ## License
 
-Proprietary — Wyzr / Alo Explorers.
+Proprietary — Ālo Explorers.

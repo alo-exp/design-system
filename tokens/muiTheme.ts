@@ -1,7 +1,7 @@
 /**
- * Wyzr MUI Theme Factory
+ * Ālo Design System — MUI Theme Factory
  *
- * Creates a Material UI theme for the /app route with Wyzr's design tokens.
+ * Creates a Material UI theme for the /app route with Ālo's design tokens.
  * Used alongside the CSS custom properties in tokens.css (which serves the homepage).
  *
  * Usage:

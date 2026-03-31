@@ -1,6 +1,6 @@
-# Wyzr Design System — Developer Reference
+# Ālo Design System — Developer Reference
 
-> Full spec: `docs/superpowers/specs/2026-03-25-wyzr-design-system-design.md`
+> Full spec: `specs/2026-03-25-alo-design-system-design.md`
 > Token source: `design-system/tokens.css`
 
 ## Scope
@@ -15,7 +15,7 @@ Homepage imports `design-system/tokens.css`. App route does **not**.
 ## Theme Switching
 
 Default: dark. Set by inline `<script>` in `index.html` before first paint.
-Toggle persists to `localStorage` key `wyzr-theme`.
+Toggle persists to `localStorage` key `alo-theme`.
 Attribute on `<html>`: `data-theme="dark"` | `data-theme="light"`.
 
 ## Quick Token Reference

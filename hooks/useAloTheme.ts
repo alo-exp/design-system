@@ -1,17 +1,14 @@
 /**
- * Shared theme hook — manages dark/light mode for the homepage shell.
- * Handles localStorage persistence, data-theme attribute sync, and toggle.
- *
- * Replaces the identical useState/useEffect/toggleTheme pattern previously
- * duplicated in HomePage, AppPage, HomeHelpPage, HomePrivacyPage, HomeTermsPage.
+ * Ālo Design System — Theme Hook
+ * Manages dark/light mode: localStorage persistence, data-theme attribute sync, toggle.
  */
 import { useState, useEffect } from 'react';
 
 export type Theme = 'dark' | 'light';
 
-const STORAGE_KEY = 'wyzr-theme';
+const STORAGE_KEY = 'alo-theme';
 
-export function useWyzrTheme() {
+export function useAloTheme() {
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(STORAGE_KEY) as Theme) || 'dark'
   );
