@@ -191,18 +191,18 @@ Typography is part of the design system, not the theme — all Ālo Labs product
 | Role | Token | Family | Source |
 |------|-------|--------|--------|
 | Headings, UI chrome | `--font-heading` | Space Grotesk | Google Fonts |
-| Body / prose | `--font-body` | Plus Jakarta Sans | Google Fonts |
+| Body / prose | `--font-body` | Roboto | Google Fonts |
 | Monospace | `--font-mono` | Roboto Mono | Google Fonts |
 
 **Usage rule:** Headings (h1–h6), nav, buttons, badges, section labels, and all UI chrome use `--font-heading`. Body copy, card descriptions, table cells, captions, help text, and all prose use `--font-body`.
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 ```
 
 ```css
 --font-heading: 'Space Grotesk', system-ui, sans-serif;
---font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
+--font-body:    'Roboto', system-ui, sans-serif;
 --font-mono:    'Roboto Mono', monospace;
 /* Deprecated — use --font-body for prose, --font-heading for UI labels */
 --font-sans:    var(--font-body);
@@ -222,19 +222,19 @@ Typography is part of the design system, not the theme — all Ālo Labs product
 | Body | `--font-body` | `1rem` | 400 | `1.7` | — | `--text-secondary` | Default prose |
 | Body small | `--font-body` | `.875rem` | 400 | `1.6` | — | `--text-secondary` | Card descriptions |
 | Caption / dim | `--font-body` | `.8rem` | 400 | — | — | `--text-dim` | Metadata, timestamps |
-| Code (inline) | `--font-mono` | `.9rem` | 400 | — | — | `--accent-light` | bg `--bg-code`; padding `2px 6px`; radius `4px` |
-| Code (block) | `--font-mono` | `.9rem` | 400 | `1.9` | — | `--text-secondary` | |
+| Code (inline) | `--font-mono` | `1rem` | 400 | — | — | `--accent-light` | bg `--bg-code`; padding `2px 6px`; radius `4px` |
+| Code (block) | `--font-mono` | `1rem` | 400 | `1.9` | — | `--text-secondary` | |
 | Nav links | `--font-heading` | `.875rem` | 500 | — | — | `--text-secondary` | |
 | Badges / tags | `--font-heading` | `.7rem`–`.75rem` | 700 | — | `.04em`–`.1em` | varies (see badge palette in components.md) | Uppercase |
 | Hero tagline caps | `--font-heading` | `.82rem` | 700 | — | `.22em` | `--accent-light` | All-caps |
 | Step card title | `--font-heading` | `.95rem` | 700 | `1.4` | — | `--text-primary` | Inside `.step-card` |
 | Step card desc | `--font-body` | `.84rem` | 400 | `1.6` | — | `--text-secondary` | Inside `.step-card` |
-| Step card output | `--font-mono` | `.87rem` | 400 | — | — | `--text-dim` | |
+| Step card output | `--font-mono` | `.95rem` | 400 | — | — | `--text-dim` | |
 | Phase header | `--font-heading` | `.8rem` | 700 | — | `.08em` | `#fff` (on colored bg) | Uppercase pill label |
 | Sidebar items | `--font-body` | `.85rem` | 400–600 | `1.5` | — | `--text-secondary` / `--accent-light` (active) | |
 | Plugin name | `--font-heading` | `.95rem`–`1rem` | 800 | — | `-.02em` | `--text-primary` | Ecosystem card |
 | Plugin role label | `--font-heading` | `.7rem`–`.75rem` | 700 | — | `.08em` | `--accent-light` or `--cyan` | Uppercase |
-| Enforcement body | `--font-mono` | `.9rem` | 400 | `1.9` | — | `--text-secondary` | |
+| Enforcement body | `--font-mono` | `1rem` | 400 | `1.9` | — | `--text-secondary` | |
 | Brooks quote | `--font-body` | `.95rem` | 400 | `1.7` | — | `--text-dim` | `font-style: italic` |
 | Brooks attribution | `--font-body` | `.8rem` | 400 | — | — | `--text-dim` | |
 | Version badge | `--font-heading` | `.75rem` | 600 | — | `.04em` | `--accent-light` | Includes animated live dot |
