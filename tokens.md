@@ -188,56 +188,64 @@ Typography is part of the design system, not the theme — all Ālo Labs product
 
 ### Typefaces
 
-| Role | Family | Source |
-|------|--------|--------|
-| Sans-serif | Space Grotesk | Google Fonts |
-| Monospace | Fira Code | Google Fonts |
+| Role | Token | Family | Source |
+|------|-------|--------|--------|
+| Headings, UI chrome | `--font-heading` | Space Grotesk | Google Fonts |
+| Body / prose | `--font-body` | Plus Jakarta Sans | Google Fonts |
+| Monospace | `--font-mono` | Fira Code | Google Fonts |
+
+**Usage rule:** Headings (h1–h6), nav, buttons, badges, section labels, and all UI chrome use `--font-heading`. Body copy, card descriptions, table cells, captions, help text, and all prose use `--font-body`.
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 ```
 
 ```css
---font-sans: 'Space Grotesk', system-ui, sans-serif;
---font-mono: 'Fira Code', monospace;
+--font-heading: 'Space Grotesk', system-ui, sans-serif;
+--font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
+--font-mono:    'Fira Code', monospace;
+/* Deprecated — use --font-body for prose, --font-heading for UI labels */
+--font-sans:    var(--font-body);
 ```
 
 ### Type Scale
 
-| Element | Size | Weight | Line-height | Letter-spacing | Color token | Notes |
-|---------|------|--------|-------------|----------------|-------------|-------|
-| Hero h1 | `clamp(2.2rem, 5vw, 4rem)` | 900 | `1.05` | `-.04em` | `--text-primary` (chrome gradient on product name span) | |
-| Section title | `clamp(1.8rem, 3vw, 2.5rem)` | 800 | `1.2` | `-.03em` | `--heading-muted` |  |
-| Card h3 | `1.1rem` | 700 | `1.3` | — | `--heading-muted` | |
-| Doc h1 | `clamp(1.8rem, 3.5vw, 2.8rem)` | 900 | `1.1` | `-.04em` | `--text-primary` | Help page heroes |
-| Doc h2 | `1.4rem` | 800 | `1.3` | `-.03em` | `--heading-muted` | Doc section headings |
-| Doc h3 | `1rem` | 700 | `1.4` | — | `--heading-muted` | Doc sub-headings |
-| Section label | `.75rem` | 700 | — | `.12em` | `--accent-light` | Uppercase eyebrow |
-| Body | `1rem` | 400 | `1.7` | — | `--text-secondary` | Default prose |
-| Body small | `.875rem` | 400 | `1.6` | — | `--text-secondary` | Card descriptions |
-| Caption / dim | `.8rem` | 400 | — | — | `--text-dim` | Metadata, timestamps |
-| Code (inline) | `.82rem` | 400 | — | — | `--accent-light` | `font-family: var(--font-mono)`; bg `--bg-code`; padding `2px 6px`; radius `4px` |
-| Code (block) | `.82rem` | 400 | `1.9` | — | `--text-secondary` | `font-family: var(--font-mono)` |
-| Nav links | `.875rem` | 500 | — | — | `--text-secondary` | |
-| Badges / tags | `.7rem`–`.75rem` | 700 | — | `.04em`–`.1em` | varies (see badge palette in components.md) | Uppercase |
-| Hero tagline caps | `.82rem` | 700 | — | `.22em` | `--accent-light` | All-caps |
-| Step card title | `.95rem` | 700 | `1.4` | — | `--text-primary` | Inside `.step-card` |
-| Step card desc | `.84rem` | 400 | `1.6` | — | `--text-secondary` | Inside `.step-card` |
-| Step card output | `.78rem` | 400 | — | — | `--text-dim` | `font-family: var(--font-mono)` |
-| Phase header | `.8rem` | 700 | — | `.08em` | `#fff` (on colored bg) | Uppercase pill label |
-| Sidebar items | `.85rem` | 400–600 | `1.5` | — | `--text-secondary` / `--accent-light` (active) | |
-| Plugin name | `.95rem`–`1rem` | 800 | — | `-.02em` | `--text-primary` | Ecosystem card |
-| Plugin role label | `.7rem`–`.75rem` | 700 | — | `.08em` | `--accent-light` or `--cyan` | Uppercase |
-| Enforcement body | `.82rem` | 400 | `1.9` | — | `--text-secondary` | `font-family: var(--font-mono)` |
-| Brooks quote | `.95rem` | 400 | `1.7` | — | `--text-dim` | `font-style: italic` |
-| Brooks attribution | `.8rem` | 400 | — | — | `--text-dim` | |
-| Version badge | `.75rem` | 600 | — | `.04em` | `--accent-light` | Includes animated live dot |
+| Element | Font | Size | Weight | Line-height | Letter-spacing | Color token | Notes |
+|---------|------|------|--------|-------------|----------------|-------------|-------|
+| Hero h1 | `--font-heading` | `clamp(2.2rem, 5vw, 4rem)` | 900 | `1.05` | `-.04em` | `--text-primary` (chrome gradient on product name span) | |
+| Section title | `--font-heading` | `clamp(1.8rem, 3vw, 2.5rem)` | 800 | `1.2` | `-.03em` | `--heading-muted` |  |
+| Card h3 | `--font-heading` | `1.1rem` | 700 | `1.3` | — | `--heading-muted` | |
+| Doc h1 | `--font-heading` | `clamp(1.8rem, 3.5vw, 2.8rem)` | 900 | `1.1` | `-.04em` | `--text-primary` | Help page heroes |
+| Doc h2 | `--font-heading` | `1.4rem` | 800 | `1.3` | `-.03em` | `--heading-muted` | Doc section headings |
+| Doc h3 | `--font-heading` | `1rem` | 700 | `1.4` | — | `--heading-muted` | Doc sub-headings |
+| Section label | `--font-heading` | `.75rem` | 700 | — | `.12em` | `--accent-light` | Uppercase eyebrow |
+| Body | `--font-body` | `1rem` | 400 | `1.7` | — | `--text-secondary` | Default prose |
+| Body small | `--font-body` | `.875rem` | 400 | `1.6` | — | `--text-secondary` | Card descriptions |
+| Caption / dim | `--font-body` | `.8rem` | 400 | — | — | `--text-dim` | Metadata, timestamps |
+| Code (inline) | `--font-mono` | `.82rem` | 400 | — | — | `--accent-light` | bg `--bg-code`; padding `2px 6px`; radius `4px` |
+| Code (block) | `--font-mono` | `.82rem` | 400 | `1.9` | — | `--text-secondary` | |
+| Nav links | `--font-heading` | `.875rem` | 500 | — | — | `--text-secondary` | |
+| Badges / tags | `--font-heading` | `.7rem`–`.75rem` | 700 | — | `.04em`–`.1em` | varies (see badge palette in components.md) | Uppercase |
+| Hero tagline caps | `--font-heading` | `.82rem` | 700 | — | `.22em` | `--accent-light` | All-caps |
+| Step card title | `--font-heading` | `.95rem` | 700 | `1.4` | — | `--text-primary` | Inside `.step-card` |
+| Step card desc | `--font-body` | `.84rem` | 400 | `1.6` | — | `--text-secondary` | Inside `.step-card` |
+| Step card output | `--font-mono` | `.78rem` | 400 | — | — | `--text-dim` | |
+| Phase header | `--font-heading` | `.8rem` | 700 | — | `.08em` | `#fff` (on colored bg) | Uppercase pill label |
+| Sidebar items | `--font-body` | `.85rem` | 400–600 | `1.5` | — | `--text-secondary` / `--accent-light` (active) | |
+| Plugin name | `--font-heading` | `.95rem`–`1rem` | 800 | — | `-.02em` | `--text-primary` | Ecosystem card |
+| Plugin role label | `--font-heading` | `.7rem`–`.75rem` | 700 | — | `.08em` | `--accent-light` or `--cyan` | Uppercase |
+| Enforcement body | `--font-mono` | `.82rem` | 400 | `1.9` | — | `--text-secondary` | |
+| Brooks quote | `--font-body` | `.95rem` | 400 | `1.7` | — | `--text-dim` | `font-style: italic` |
+| Brooks attribution | `--font-body` | `.8rem` | 400 | — | — | `--text-dim` | |
+| Version badge | `--font-heading` | `.75rem` | 600 | — | `.04em` | `--accent-light` | Includes animated live dot |
 
 ### Heading Rendering
 
 ```css
 html { -webkit-font-smoothing: antialiased; }
-body { font-family: var(--font-sans); line-height: 1.7; }
+body { font-family: var(--font-body); line-height: 1.7; }
+h1, h2, h3, h4, h5, h6,
+nav, button, .badge, .section-label { font-family: var(--font-heading); }
 ```
 
 ### Italic Usage
