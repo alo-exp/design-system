@@ -1,88 +1,92 @@
-# Ālo Design System
+# Ālo Labs — Product Design System
 
-A token-based design system with dark/light mode, responsive breakpoints, and dual rendering contexts — CSS custom properties for the homepage, MUI theme for the app.
+A complete guide to replicating the visual language, component library, and content structure used across all Ālo Labs product sites. Derived from the Silver Bullet site as the reference implementation.
 
-## Structure
+---
+
+## Documents
+
+| File | Contents |
+|------|----------|
+| [tokens.md](tokens.md) | Token slot definitions — names, roles, and usage for all color, typography, spacing, radius, shadow, and motion tokens |
+| [themes/silver-bullet.md](themes/silver-bullet.md) | **Reference theme** — all actual hex/rgba values for both light and dark modes, plus design rationale and adaptation guide |
+| [components.md](components.md) | Every UI component with variants, states, CSS, and vanilla JS patterns (theme toggle, mobile nav, tabs, scroll animations, z-index layers) |
+| [layout-patterns.md](layout-patterns.md) | Page skeletons, section patterns, grid systems, responsive design — full per-breakpoint spec for all 6 breakpoints |
+| [content-guidelines-homepage.md](content-guidelines-homepage.md) | Homepage narrative structure, copy rules, section playbook |
+| [content-guidelines-help-center.md](content-guidelines-help-center.md) | Help center architecture, page types, writing standards |
+
+---
+
+## Design Philosophy
+
+These are fixed principles of the design system — they apply to every product regardless of theme.
+
+**Single brand accent.** Each product has one accent color that drives all interactive elements: buttons, links, badges, borders, glows. One color, not a palette. The accent is perceptually matched across light and dark modes so it reads identically on any canvas.
+
+**Space Grotesk + Fira Code.** The sans and mono pair is non-negotiable — they define the AI-native engineering aesthetic across all Ālo Labs products.
+
+**Cards over prose.** Information is organized into scannable cards with consistent border/radius/hover treatment rather than long text blocks.
+
+**Tokens, not values.** Every color, shadow, radius, and gradient references a CSS custom property. No hardcoded hex values in component CSS. `tokens.css` is the only file that contains values — everything else references tokens.
+
+**Two-mode theming.** Every product ships with two modes: a default mode and an alternate. The default is chosen per product based on its audience and aesthetic. The toggle is always user-controlled and persisted via `localStorage`.
+
+---
+
+## Themes
+
+Color choices — background palette, accent values, shadow weights, text tones — belong to the **theme**, not the design system. The design system defines token names and roles; themes supply the values.
 
 ```
-design-system/
-├── tokens/               Core design tokens
-│   ├── tokens.css        CSS custom properties (colors, spacing, typography, shadows)
-│   ├── global.css        Base resets and font configuration
-│   └── muiTheme.ts       MUI theme factory (React/Material UI)
-├── components/           Component-level stylesheets
-│   ├── homepage.css      Shared homepage utilities (buttons, containers, fade-in)
-│   ├── HomeNav.css       Navigation bar (fixed, backdrop blur, mobile hamburger)
-│   ├── HomeHero.css      Hero section (gradient text, decorative blobs, CTA)
-│   ├── HomeFeatures.css  Feature cards grid (3→2→1 column responsive)
-│   ├── HomeHowItWorks.css  Steps section (numbered badges, 3-column grid)
-│   ├── HomeCTA.css       Call-to-action section
-│   ├── HomeFooter.css    Footer (links, copyright)
-│   └── HomeLegal.css     Legal pages (Terms, Privacy)
-├── hooks/
-│   └── useAloTheme.ts    React hook for dark/light mode (localStorage-backed)
-├── docs/
-│   └── DESIGN_SYSTEM.md  Quick-reference developer guide
-└── specs/
-    └── 2026-03-25-alo-design-system-design.md  Full specification
+design-system/tokens.md        ← token slots (names + roles, no values)
+design-system/themes/*.md      ← one file per theme with all actual values
+site/tokens.css                ← the active theme implemented in CSS
 ```
 
-## Brand
+To create a new product theme: see the **Adapting for a New Product** section in [`themes/silver-bullet.md`](themes/silver-bullet.md).
 
-| Token | Value |
-|-------|-------|
-| Primary | Indigo `#4F46E5` |
-| Secondary | Violet `#7C3AED` |
-| Tertiary | Pink `#DB2777` |
-| Font (homepage) | Inter |
-| Font (app headings) | Plus Jakarta Sans |
-| Default mode | Dark |
+---
 
-## Usage
+## CSS Architecture
 
-### CSS Custom Properties (Homepage)
+```
+site/tokens.css          ← active theme (link on every page)
+site/index.html <style>  ← homepage component CSS
+site/help/**/index.html  ← help-page component CSS (scoped per page)
+```
 
-```css
-@import '../design-system/tokens.css';
+All pages link `tokens.css`. Component CSS lives inline in `<style>` per page. No external CSS framework.
 
-.my-component {
-  background: var(--color-surface);
-  color: var(--color-text-primary);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
-  box-shadow: var(--shadow-card);
-  transition: var(--transition-default);
+---
+
+## Theme Toggle
+
+Every page implements identical theme toggle logic. The `localStorage` key and default mode are the only product-specific variables.
+
+```html
+<!-- In <head> — prevents flash of wrong theme -->
+<script>
+  document.documentElement.setAttribute(
+    'data-theme',
+    localStorage.getItem('{product}-theme') === 'light' ? 'light' : 'dark'
+  );
+</script>
+```
+
+```js
+function applyTheme(dark) {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  document.getElementById('icon-sun').style.display  = dark ? 'none' : '';
+  document.getElementById('icon-moon').style.display = dark ? '' : 'none';
+  localStorage.setItem('{product}-theme', dark ? 'dark' : 'light');
 }
+function toggleTheme() {
+  applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+}
+(function () {
+  const s = localStorage.getItem('{product}-theme');
+  applyTheme(s === 'light' ? false : true);  // default: dark
+})();
 ```
 
-### MUI Theme (App)
-
-```tsx
-import { buildMuiTheme } from './design-system/tokens/muiTheme';
-import { ThemeProvider } from '@mui/material';
-
-const theme = buildMuiTheme('dark');
-<ThemeProvider theme={theme}>...</ThemeProvider>
-```
-
-### Dark/Light Mode
-
-```tsx
-import { useAloTheme } from './design-system/hooks/useAloTheme';
-
-const { theme, toggleTheme } = useAloTheme();
-```
-
-Theme is applied via `data-theme="dark|light"` on `<html>`, persisted to `localStorage('alo-theme')`.
-
-## Responsive Breakpoints
-
-| Breakpoint | Width |
-|-----------|-------|
-| Mobile | ≤ 768px |
-| Tablet | 769–1024px |
-| Desktop | ≥ 1025px |
-
-## License
-
-MIT
+Replace `{product}` with the product slug (e.g. `silver-bullet`). To default to light instead, swap the fallback: `applyTheme(s === 'dark' ? true : false)`.
