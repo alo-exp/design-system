@@ -62,7 +62,7 @@ def init_chrome(site: Path) -> None:
 
 LUCIDE = '<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>'
 LUCIDE_TAG_RE = re.compile(
-    r'<script src="https://unpkg\.com/lucide@[^"]+"></script>\s*',
+    r'<script src="https://unpkg\.com/lucide@[^"]+"[^>]*></script>\s*',
     re.IGNORECASE,
 )
 LEGACY_DARK_DEFAULT_BOOT_RE = re.compile(
