@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-key="example-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example Product</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="chrome.css?v=site-chrome-11">
+  <script>(function(){try{var t=localStorage.getItem('example-theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');}catch(e){}})();</script>
+  <style>
+    .hero{padding:120px 24px 80px;text-align:center}
+    .hero h1{font-family:var(--font-heading);font-size:clamp(2rem,5vw,3.2rem);margin:0 0 16px}
+    .hero p{color:var(--text-secondary);max-width:640px;margin:0 auto 32px}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px}
+    section{padding:64px 0}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .feature-card{background:var(--bg-card);border-radius:var(--radius);padding:24px}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="./" class="nav-brand"><span class="logo gradient">Example Product</span></a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <h1>Ālo site kit starter</h1>
+    <p>Copy this repo's <code>kit/</code> into your project, customize <code>site.config.json</code>, and run <code>apply-site-chrome.py</code> for exact Ālo Labs chrome.</p>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="feature-grid">
+      <div class="feature-card"><h3>Light-first</h3><p>D-Din + SB Plex Mono, green accent, borderless cards with hover shadow.</p></div>
+      <div class="feature-card"><h3>Shared chrome</h3><p>Nav, footer, help subnav, and theme toggle from one kit.</p></div>
+      <div class="feature-card"><h3>Agent contract</h3><p><code>DESIGN.md</code> follows the google-labs-code design.md spec.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-credit">Example Product · Innovated at Ālo Labs</div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="chrome.js?v=site-chrome-11"></script>
+</body>
+</html>

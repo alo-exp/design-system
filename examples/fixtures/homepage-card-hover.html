@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Card hover fixture</title></head>
+<body>
+<section id="proof">
+<style>
+/* ───── UNIFIED CARD SURFACE (faint border, shadow on hover only) ───── */
+.pain-card,
+.cost-card,
+.cost-emotional,
+.future-card,
+.feature-card,
+.mech-card,
+.proof-card,
+.ecosystem-card,
+.devops-card,
+.layer-card,
+.compare-card,
+.sb-lifecycle-benefit,
+.sb-lifecycle-panel,
+.sb-lifecycle-mini,
+.faq-item,
+.install-block,
+.callout,
+.stakes-callout,
+.gaps-callout,
+.cost-stakes,
+.enforcement-block{
+  box-shadow:none;
+  border:1px solid var(--card-border-faint);
+  transition:border-color .3s,box-shadow .3s;
+}
+.pain-card:hover,
+.cost-card:hover,
+.cost-emotional:hover,
+.future-card:hover,
+.feature-card:hover,
+.mech-card:hover,
+.proof-card:hover,
+.ecosystem-card:hover,
+.devops-card:hover,
+.layer-card:hover,
+.compare-card:hover,
+.sb-lifecycle-benefit:hover,
+.sb-lifecycle-panel:hover,
+.sb-lifecycle-mini:hover,
+.faq-item:hover,
+.install-block:hover,
+.callout:hover,
+.stakes-callout:hover,
+.gaps-callout:hover,
+.cost-stakes:hover,
+.enforcement-block:hover{
+  border-color:var(--border-hover);
+  box-shadow:var(--card-shadow-hover);
+  transform:none;
+}
+.callout{border:1px solid var(--card-border-faint)}
+</style>
+<div class="callout alpha-honesty-callout">
+  <div class="callout-label"><i data-lucide="info"></i><span>Alpha Honesty</span></div>
+  <p>Fixture copy for regression guard.</p>
+</div>
+</section>
+</body>
+</html>
