@@ -1,0 +1,13 @@
+{
+  "product_name": "Silver Bullet",
+  "logo_path": "silver-bullet.png",
+  "github_url": "https://github.com/alo-exp/silver-bullet",
+  "copyright_year": "2026",
+  "theme_storage_key": "silver-bullet-theme",
+  "theme_storage_key_legacy": "sb-theme",
+  "alpha_badge_html": "<span class=\"nav-alpha\" title=\"Pre-release software &mdash; APIs may change\">ALPHA</span>",
+  "nav_links_html": "<li><a href=\"{{ROOT}}#problem\">Problem</a></li>\n      <li><a href=\"{{ROOT}}#future\">What If</a></li>\n      <li><a href=\"{{ROOT}}#mechanism\">How It Works</a></li>\n      <li><a href=\"{{ROOT}}#workflow\">Workflows</a></li>\n      <li><a href=\"{{ROOT}}#install\">Install</a></li>",
+  "help_links_html": "<div class=\"help-subnav-links\"><a href=\"../getting-started/\">Start</a><a href=\"../concepts/\">Concepts</a><a href=\"../workflows/\">Workflows</a><a href=\"../reference/\">Reference</a><a href=\"../troubleshooting/\">Troubleshoot</a></div>",
+  "help_search_html": "",
+  "chrome_version": "site-chrome-11"
+}

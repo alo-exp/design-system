@@ -1,0 +1,13 @@
+{
+  "product_name": "Example Product",
+  "logo_path": "logo.png",
+  "github_url": "https://github.com/alo-exp/example",
+  "copyright_year": "2026",
+  "theme_storage_key": "example-theme",
+  "theme_storage_key_legacy": "",
+  "alpha_badge_html": "",
+  "nav_links_html": "<li><a href=\"{{ROOT}}#features\">Features</a></li>\n      <li><a href=\"{{ROOT}}#install\">Install</a></li>",
+  "help_links_html": "",
+  "help_search_html": "",
+  "chrome_version": "site-chrome-11"
+}

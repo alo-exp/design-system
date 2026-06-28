@@ -1,92 +1,85 @@
-# Ālo Labs — Product Design System
+# Ālo Site Kit
 
-A complete guide to replicating the visual language, component library, and content structure used across all Ālo Labs product sites. Derived from the Silver Bullet site as the reference implementation.
+**One-stop source for exact Ālo Labs product-site look-and-feel.** Ship marketing pages and help centers that match Silver Bullet and other Ālo products without reverse-engineering CSS from a live repo.
 
----
-
-## Documents
-
-| File | Contents |
-|------|----------|
-| [tokens.md](tokens.md) | Token slot definitions — names, roles, and usage for all color, typography, spacing, radius, shadow, and motion tokens |
-| [themes/silver-bullet.md](themes/silver-bullet.md) | **Reference theme** — all actual hex/rgba values for both light and dark modes, plus design rationale and adaptation guide |
-| [components.md](components.md) | Every UI component with variants, states, CSS, and vanilla JS patterns (theme toggle, mobile nav, tabs, scroll animations, z-index layers) |
-| [layout-patterns.md](layout-patterns.md) | Page skeletons, section patterns, grid systems, responsive design — full per-breakpoint spec for all 6 breakpoints |
-| [content-guidelines-homepage.md](content-guidelines-homepage.md) | Homepage narrative structure, copy rules, section playbook |
-| [content-guidelines-help-center.md](content-guidelines-help-center.md) | Help center architecture, page types, writing standards |
+This repository replaces the old Wyzr-era theme docs (Space Grotesk, dark-default, per-theme markdown files). Everything you need lives in `kit/`, `DESIGN.md`, and `scripts/`.
 
 ---
 
-## Design Philosophy
+## What's in the box
 
-These are fixed principles of the design system — they apply to every product regardless of theme.
-
-**Single brand accent.** Each product has one accent color that drives all interactive elements: buttons, links, badges, borders, glows. One color, not a palette. The accent is perceptually matched across light and dark modes so it reads identically on any canvas.
-
-**Space Grotesk + Fira Code.** The sans and mono pair is non-negotiable — they define the AI-native engineering aesthetic across all Ālo Labs products.
-
-**Cards over prose.** Information is organized into scannable cards with consistent border/radius/hover treatment rather than long text blocks.
-
-**Tokens, not values.** Every color, shadow, radius, and gradient references a CSS custom property. No hardcoded hex values in component CSS. `tokens.css` is the only file that contains values — everything else references tokens.
-
-**Two-mode theming.** Every product ships with two modes: a default mode and an alternate. The default is chosen per product based on its audience and aesthetic. The toggle is always user-controlled and persisted via `localStorage`.
-
----
-
-## Themes
-
-Color choices — background palette, accent values, shadow weights, text tones — belong to the **theme**, not the design system. The design system defines token names and roles; themes supply the values.
-
-```
-design-system/tokens.md        ← token slots (names + roles, no values)
-design-system/themes/*.md      ← one file per theme with all actual values
-site/tokens.css                ← the active theme implemented in CSS
-```
-
-To create a new product theme: see the **Adapting for a New Product** section in [`themes/silver-bullet.md`](themes/silver-bullet.md).
+| Path | Role |
+|------|------|
+| [`DESIGN.md`](DESIGN.md) | Agent-facing design contract ([design.md](https://github.com/google-labs-code/design.md) spec) — typography, colors, components, layout |
+| [`kit/tokens.css`](kit/tokens.css) | All CSS custom properties + D-Din `@font-face` (single source of truth for values) |
+| [`kit/chrome.css`](kit/chrome.css) | Shared nav, footer, help subnav, theme toggle, z-index stack |
+| [`kit/chrome.js`](kit/chrome.js) | Theme persistence + mobile nav + Lucide init |
+| [`kit/neutral-variants.css`](kit/neutral-variants.css) | Help-center neutral palette + s3 home icon variant |
+| [`kit/help/common.js`](kit/help/common.js) | Help sidebar / breadcrumb helpers |
+| [`kit/_chrome/`](kit/_chrome/) | Parameterized nav/footer/help-subnav HTML templates |
+| [`kit/fonts/`](kit/fonts/) | D-Din webfonts (OFL) |
+| [`site.config.example.json`](site.config.example.json) | Product name, logo, GitHub URL, nav links, theme localStorage keys |
+| [`scripts/`](scripts/) | Bootstrap, render chrome, apply chrome, validate |
+| [`docs/SITE-KIT.md`](docs/SITE-KIT.md) | Integration guide for new projects |
+| [`docs/TOKEN-REFERENCE.md`](docs/TOKEN-REFERENCE.md) | Token catalog from shipped CSS |
+| [`examples/`](examples/) | Starter page + regression fixtures |
 
 ---
 
-## CSS Architecture
+## Quick start (new project)
 
-```
-site/tokens.css          ← active theme (link on every page)
-site/index.html <style>  ← homepage component CSS
-site/help/**/index.html  ← help-page component CSS (scoped per page)
+```bash
+git clone https://github.com/alo-exp/design-system.git
+cd design-system
+bash scripts/bootstrap-alo-site.sh /path/to/your-project
 ```
 
-All pages link `tokens.css`. Component CSS lives inline in `<style>` per page. No external CSS framework.
+Then:
+
+1. Edit `/path/to/your-project/site.config.json` — product name, logo, nav links, theme keys.
+2. Re-render chrome: `python3 scripts/render-chrome.py --project /path/to/your-project`
+3. Add HTML under `site/` (include `<nav>` and `<footer>` placeholder blocks).
+4. Apply chrome: `python3 scripts/apply-site-chrome.py --site /path/to/your-project/site`
+5. Lint the contract: `npx -p @google/design.md designmd lint DESIGN.md`
+
+Every page must link `tokens.css` and use `data-theme="light"` as default (light-first). See [`docs/SITE-KIT.md`](docs/SITE-KIT.md) for the full checklist.
 
 ---
 
-## Theme Toggle
+## Design principles (fixed across all Ālo sites)
 
-Every page implements identical theme toggle logic. The `localStorage` key and default mode are the only product-specific variables.
+- **D-Din + SB Plex Mono** — not Space Grotesk / Fira Code
+- **Light-first** — `data-theme="light"` default; user toggle persisted in `localStorage`
+- **Single green accent** (`--accent`) with perceptually matched light/dark values
+- **Tokens, not literals** — component CSS references `var(--*)` only; values live in `tokens.css`
+- **Unified card surface** — faint border at rest, `--card-shadow-hover` on hover (no per-card shadow overrides)
+- **Shared chrome** — nav height, help subnav (72px), footer, and theme toggle from `chrome.css` / `_chrome/` partials
 
-```html
-<!-- In <head> — prevents flash of wrong theme -->
-<script>
-  document.documentElement.setAttribute(
-    'data-theme',
-    localStorage.getItem('{product}-theme') === 'light' ? 'light' : 'dark'
-  );
-</script>
+---
+
+## Validation
+
+```bash
+bash scripts/validate-kit.sh
 ```
 
-```js
-function applyTheme(dark) {
-  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  document.getElementById('icon-sun').style.display  = dark ? 'none' : '';
-  document.getElementById('icon-moon').style.display = dark ? '' : 'none';
-  localStorage.setItem('{product}-theme', dark ? 'dark' : 'light');
-}
-function toggleTheme() {
-  applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
-}
-(function () {
-  const s = localStorage.getItem('{product}-theme');
-  applyTheme(s === 'light' ? false : true);  // default: dark
-})();
-```
+Runs chrome regression tests against `kit/` and lints `DESIGN.md`.
 
-Replace `{product}` with the product slug (e.g. `silver-bullet`). To default to light instead, swap the fallback: `applyTheme(s === 'dark' ? true : false)`.
+---
+
+## For AI agents building Ālo sites
+
+1. Read **`DESIGN.md`** first — it is the authoritative contract.
+2. Copy or bootstrap **`kit/`** — do not invent parallel token files.
+3. Customize via **`site.config.json`** only for product-specific strings (name, links, logo).
+4. Run **`apply-site-chrome.py`** after editing HTML so nav/footer/help subnav stay canonical.
+5. Run **`tests/test-chrome-regression.sh`** before claiming visual parity.
+
+`DESIGN.md` alone gets ~80–90% parity. Full replication requires the kit assets above.
+
+---
+
+## License
+
+Kit fonts: D-Din (SIL Open Font License) — see [`kit/fonts/D-DIN-OFL.txt`](kit/fonts/D-DIN-OFL.txt).  
+Repository: see [`LICENSE`](LICENSE).
