@@ -23,6 +23,22 @@ This repository replaces the old Wyzr-era theme docs (Space Grotesk, dark-defaul
 | [`docs/SITE-KIT.md`](docs/SITE-KIT.md) | Integration guide for new projects |
 | [`docs/TOKEN-REFERENCE.md`](docs/TOKEN-REFERENCE.md) | Token catalog from shipped CSS |
 | [`examples/`](examples/) | Starter page + regression fixtures |
+| [`cmf/`](cmf/) | **Content Messaging Framework v3.0** — required for content revamps |
+| [`skills/alo-site-revamp/`](skills/alo-site-revamp/SKILL.md) | Agent skill: full design + CMF site revamp workflow |
+
+---
+
+## Content revamps (CMF)
+
+Visual standardization alone is not enough. Every homepage narrative overhaul must follow the **Content Messaging Framework (CMF) v3.0** — the same scaffold used for the Silver Bullet site revamp.
+
+| Path | Role |
+|------|------|
+| [`cmf/CMF-v3.md`](cmf/CMF-v3.md) | 14-component framework (three acts, compression rules) |
+| [`cmf/WORKSHEET-TEMPLATE.md`](cmf/WORKSHEET-TEMPLATE.md) | Fill per product before writing copy |
+| [`cmf/examples/`](cmf/examples/) | Completed worksheets (Silver Bullet, Sidekick, …) |
+
+**Agent workflow:** invoke skill **`alo-site-revamp`** — researches target repo, fills CMF worksheet, bootstraps kit, rewrites `site/`, applies chrome, validates.
 
 ---
 
@@ -69,11 +85,13 @@ Runs chrome regression tests against `kit/` and lints `DESIGN.md`.
 
 ## For AI agents building Ālo sites
 
-1. Read **`DESIGN.md`** first — it is the authoritative contract.
-2. Copy or bootstrap **`kit/`** — do not invent parallel token files.
-3. Customize via **`site.config.json`** only for product-specific strings (name, links, logo).
-4. Run **`apply-site-chrome.py`** after editing HTML so nav/footer/help subnav stay canonical.
-5. Run **`tests/test-chrome-regression.sh`** before claiming visual parity.
+1. Read **`DESIGN.md`** first — it is the authoritative visual contract.
+2. Read **`cmf/CMF-v3.md`** — required for any content revamp (not optional).
+3. Invoke skill **`alo-site-revamp`** for end-to-end design + content overhaul.
+4. Copy or bootstrap **`kit/`** — do not invent parallel token files.
+5. Customize via **`site.config.json`** only for product-specific strings (name, links, logo).
+6. Run **`apply-site-chrome.py`** after editing HTML so nav/footer/help subnav stay canonical.
+7. Run **`tests/test-chrome-regression.sh`** before claiming visual parity.
 
 `DESIGN.md` alone gets ~80–90% parity. Full replication requires the kit assets above.
 
